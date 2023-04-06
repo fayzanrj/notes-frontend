@@ -84,7 +84,7 @@
     overflow: hidden;
     overflow-wrap: break-word;
     color: white;
-    height: 1.2rem;
+    height: 1rem;
     font-size: .8rem;
     font-style: italic;
 }
@@ -218,5 +218,9 @@
 @media (max-width:550px) {
     .list {
         width: 75%;
+    }
+
+    .description{
+        height: 1.1rem;
     }
 }
