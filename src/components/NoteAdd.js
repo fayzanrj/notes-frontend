@@ -30,7 +30,6 @@ export default function NoteAdd() {
       <div className="add-box ">
         <div className="inner-box-add">
           <form onSubmit={handleAddNote}>
-
             <label className='add-label' htmlFor="title">Title</label><br />
             <input className='add-input' type="text" name="title" id="title" onChange={onChange} placeholder="e.g. 'Assignment', 'Homework'"  /><br />
             <label className='add-label' htmlFor="description">Description</label><br />
