@@ -1,0 +1,137 @@
+.auth-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.log-in-box {
+    cursor: pointer;
+    width: 25rem;
+    height: fit-content;
+    padding: 1rem 1rem;
+    position: relative;
+    border-bottom: 1px solid gray;
+    border-bottom-right-radius: 7px;
+    font-family: sans-serif;
+    background-color: rgba(28, 28, 30, 255);
+    border-radius: 15px;
+
+}
+
+.log-in-box .heading {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: white;
+}
+
+.log-in-box .heading h3 {
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    display: none;
+}
+
+.log-in-box .inputs {
+    margin-top: .7rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-in-box .inputs label {
+    align-self: flex-end;
+    padding: 0 1.5rem;
+    letter-spacing: .1rem;
+    color: white;
+    font-size: .8rem;
+}
+
+.log-in-box .inputs input {
+    width: 88%;
+    background-color: rgba(14, 0, 28, 0.286);
+    height: 2.5rem;
+    margin: 0rem 6% 3rem 6%;
+    padding: 0 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    outline: none;
+    border-radius: 0;
+}
+
+.log-in-box .inputs .password-input {
+    margin-right: 0;
+    position: relative;
+}
+
+
+.log-in-box .auth-btn {
+    width: 95%;
+}
+
+.log-in-box .auth-btn button {
+    float: right;
+    background-color: rgba(68, 68, 68, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: .4rem .6rem;
+}
+
+.log-in-box .auth-btn p {
+    float: left;
+    color: white;
+    margin-left: 5%;
+    font-size: .85rem;
+}
+
+.log-in-box .auth-btn p span {
+    color: rgb(145, 145, 251);
+    font-size: 1rem;
+    text-decoration: underline;
+}
+
+.res {
+    background-color: rgba(28,28,30,255);
+    position: absolute;
+    top: 0;
+    width: 15rem;
+    height: 8rem;
+    transition: 1s;
+    transform: translateY(-110%);
+    text-align: center;
+    color: white;
+    border-top: none;
+    border-radius: 12px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    padding: 2.5rem .5rem;
+    box-shadow: rgba(154, 154, 154, 0.24) 0px 3px 8px;
+}
+
+.success {
+    transform: translateY(0);
+    color: rgb(7, 205, 7);
+}
+
+.failed {
+    transform: translateY(0);
+    color: rgb(210, 90, 90);
+}
+
+.msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width:500px) {
+    .log-in-box {
+        width: 90%;
+    }
+}

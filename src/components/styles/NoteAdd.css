@@ -1,0 +1,104 @@
+
+.add-box {
+    width: 90%;
+    height: fit-content;
+    overflow: scroll;
+    padding: 4rem 1rem;
+    background-color: rgba(28,28,30,255);
+    border-radius: 25px;
+    margin-top: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-label {
+    font-size: .9rem;
+    margin-left: .5rem;
+    color: white;
+}
+
+.inner-box-add{
+    width: fit-content;
+    height: 100%;
+    margin: auto;
+}
+
+.add-input {
+    width: 30rem;
+    margin-top: .5rem;
+    margin-bottom: 1.2rem;
+    outline: none;
+    padding: 0 1rem;
+    height: 2rem;
+    border-radius: 15px;
+}
+
+.desc {
+    height: 10rem;
+    overflow: scroll;
+    font-family: sans-serif;
+    padding: 1rem;
+    resize: none;
+}
+
+.add-note {
+    float: right;
+    background-color: rgba(68, 68, 68, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: .5rem .7rem;
+}
+
+input , 
+textarea{
+    font-size: 1rem;
+    background-color: rgb(185, 185, 185);
+}
+
+input::placeholder,
+textarea::placeholder{
+    font-size: .8rem;
+    color: rgb(113, 113, 113);
+}
+
+.alert{
+    margin-bottom: 2rem;
+}
+
+.alert-error{
+    color: rgb(201, 0, 0);
+}
+
+.alert-success{
+    color: rgb(10, 214, 10);
+}
+
+
+@media (max-width:970px) {
+    .inner-box-add{
+        margin: 0;
+    }
+}
+
+@media (max-width:900px) {
+    .add-box{
+        width: 95%;
+        min-height: 50vh;
+        height: fit-content;
+        padding: 1rem;
+    }
+    .inner-box-add{
+        width: 100%;
+    }
+    .add-input{
+        width: 100%;
+    }
+
+    .error-alert{
+        font-size: .9rem;
+    }
+}

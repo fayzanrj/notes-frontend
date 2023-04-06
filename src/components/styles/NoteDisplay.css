@@ -1,0 +1,179 @@
+.box{
+    width: 79%;
+    height: 100vh;
+    background-color: black;
+    overflow-y: scroll;
+    padding: 4rem 1rem;
+    position: relative;
+}
+
+.note-box{
+    margin: auto;
+    width: 90%;
+    min-height: 30vh;
+    background-color: rgba(28,28,30,255);
+    color: white;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 25px;
+    gap: 3rem;
+    transition: 1500ms;
+    border-bottom: 1px solid gray;
+}
+
+
+
+.flex-box{
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    padding: 1rem 0;
+    padding-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+.note-title{
+    max-width: 80%;
+    outline: none;
+}
+
+.note-title h1{
+    outline: none;
+}
+.note-description{
+    padding: 0 4rem;
+    outline: none;
+    min-height: 5rem;
+    height: fit-content;
+    font-size: 1.1rem;
+}
+
+.date-tag{
+    width: 100%;
+    height: fit-content;
+}
+
+.tag{
+    min-width: 33px;
+    padding: .15rem .5rem;
+    border-radius: 30px;
+    outline: none;
+    
+}
+
+.date-s,
+.tag-s{
+    font-size: .7rem;
+    outline: none;
+}
+
+.date-s{
+    margin-top: .5rem;
+}
+
+.date,
+.tag{
+    font-size: .75rem;
+}
+
+.date{
+    width: 1rem;
+    border-radius: 30px;
+}
+
+.top-bar{
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons{
+    background-color: transparent;
+}
+
+.del-btn{
+    border: none;
+    background-color: transparent;
+}
+
+ i{
+    color : white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 700ms;
+    margin: .8rem .5rem;
+}
+
+i:hover{
+    scale: 1.2;
+}
+
+.ham-div{
+    float: right;
+    width: 10%;
+    position: relative;
+    height: 2rem;
+}
+
+.ham-icon{
+    width: fit-content;
+    display: none;
+    background-color: transparent;
+    color: white;
+    border:none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.ham-icon:hover{
+    transform: translateX(1);
+}
+
+.ham-icon-i{
+    color: white ;
+}
+
+.displayNoteInput{
+    overflow-x: hidden;
+    word-wrap: break-word;
+    height: fit-content;
+}
+
+@media (max-width:850px) {
+    .box{
+        padding: 2rem 1rem;
+    }
+    .note-box{
+        padding: 3rem 1rem;
+        width: 98%;
+    }
+    .note-description{
+        padding: 0 1rem;
+    }
+    .note-title{
+        max-width: 75%;
+    }
+}
+
+@media (max-width:700px) {
+    .box{
+        width: 100%;
+    }
+
+    .note-box{
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    .ham-icon{
+        display: block;
+    }
+    .ham-icon-i{
+        scale: 2;
+    }
+}
