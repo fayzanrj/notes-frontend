@@ -4,10 +4,12 @@ body{
 :root{
     --box-bg : rgb(255, 255, 255);
     --box-txt : black;
-    --page-bg : black;
+    --page-bg : white;
     --s-border : rgba(79, 78, 78, 0.261);
     --b-border : gray;
     --ph-bg : white;
+    --noti-bg : white;
+    --noti-txt-success : black;
 }
 
 .dark{
@@ -16,7 +18,9 @@ body{
     --page-bg : black;
     --s-border : rgba(79, 78, 78, 0.261);
     --b-border : gray;
-    --ph-bg : rgb(113, 113, 113)
+    --ph-bg : rgb(113, 113, 113);
+    --noti-bg : rgba(28,28,30,255);
+    --noti-txt-success :  rgb(7, 205, 7);
 }
 .auth-page {
     width: 100%;
@@ -24,6 +28,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--page-bg);
 }
 
 .log-in-box {
@@ -88,7 +93,7 @@ body{
 .log-in-box .auth-btn button {
     float: right;
     background-color: rgba(68, 68, 68, 255);
-    color: var(--box-txt);
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 10px;
@@ -109,7 +114,7 @@ body{
 }
 
 .res {
-    background-color: rgba(28,28,30,255);
+    background-color: var(--noti-bg);
     position: absolute;
     top: 0;
     width: 15rem;
@@ -128,12 +133,12 @@ body{
 
 .success {
     transform: translateY(0);
-    color: rgb(7, 205, 7);
+    color: var(--noti-txt-success);
 }
 
 .failed {
     transform: translateY(0);
-    color: rgb(210, 90, 90);
+    color: rgb(255, 0, 0);
 }
 
 .msg {

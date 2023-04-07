@@ -146,7 +146,7 @@ const NoteState = (props) => {
         })
       }
     } catch {
-      setLoading2(false)
+      // setLoading2(false)
       setDisplayPageStatus({
         "status": "failed",
         "msg": "Error! Check your internet and try again"

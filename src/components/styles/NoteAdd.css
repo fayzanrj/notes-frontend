@@ -67,17 +67,6 @@ textarea::placeholder{
     color: var(--box-txt);
 }
 
-.alert{
-    margin-bottom: 2rem;
-}
-
-.alert-error{
-    color: rgb(201, 0, 0);
-}
-
-.alert-success{
-    color: rgb(10, 214, 10);
-}
 
 
 @media (max-width:970px) {

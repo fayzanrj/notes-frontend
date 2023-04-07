@@ -9,11 +9,13 @@ export default function Home() {
     const { authToken, loading,theme } = context
     return (
         <>
+            <div className={`${theme}`}>
             {loading &&
                 <div className='load'>
                     <img src={theme === 'dark' ? loadingIcon1 : loadingIcon2} alt="loading" />
                 </div>}
             {authToken ? <NotePage /> : <AuthPage />}
+            </div>
         </>
     );
 }
