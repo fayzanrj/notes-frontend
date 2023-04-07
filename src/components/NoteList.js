@@ -5,7 +5,7 @@ import './styles/NoteList.css'
 
 function NoteList(props) {
     const context = useContext(NoteContext)
-    const { notes , setToDisplay , setAuthToken  ,getNotes,setLoading, setUserDetails, activeClass ,setActiveClass} = context
+    const { notes , setToDisplay , setAuthToken  ,getNotes,setLoading, setUserDetails, activeClass ,setActiveClass , theme , setTheme} = context
 
     const handleNoteAdd = ()=>{
         setToDisplay(true)
@@ -27,6 +27,13 @@ function NoteList(props) {
         // eslint-disable-next-line
     }, [])
     
+    const handleTheme = ()=>{
+        if(theme === 'dark'){
+            setTheme('')
+        } else {
+            setTheme('dark')
+        }
+    }
 
     return (
         <>
@@ -36,6 +43,9 @@ function NoteList(props) {
             </div>
                 <div className="btns">
                     <button className="add-btn btn" onClick={handleNoteAdd}><i className="fa-solid fa-file-circle-plus fa-2xl"></i></button>
+                    <button className="theme-change">
+                    <input type="checkbox" className="l" onClick={handleTheme}/>
+                    </button>
                     <button className="sign-out btn" onClick={handleSignOut}><i className="fa-solid fa-right-from-bracket fa-2xl"></i></button>
                 </div>
                 <div className="inner-list">

@@ -8,7 +8,7 @@ import NoteContext from "../context/noteContext";
 
 const NotePage = () => {
     const context = useContext(NoteContext)
-    const { toDisplay, displayPageStatus ,activeClass, setActiveClass} = context
+    const { toDisplay, displayPageStatus ,activeClass, setActiveClass , theme} = context
 
     // adding remove ACTIVE class from the notelist on btn press in mobile view 
     const handleListSize = () => {
@@ -21,7 +21,7 @@ const NotePage = () => {
 
     return (
         <>
-            <div className="page">
+            <div className={`page ${theme}`}>
                 <NoteList/>
                 <div className="box">
                     <div className="ham-div">

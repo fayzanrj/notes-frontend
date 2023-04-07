@@ -1,3 +1,23 @@
+body{
+    background-color: var(--page-bg);
+}
+:root{
+    --box-bg : rgb(255, 255, 255);
+    --box-txt : black;
+    --page-bg : black;
+    --s-border : rgba(79, 78, 78, 0.261);
+    --b-border : gray;
+    --ph-bg : white;
+}
+
+.dark{
+    --box-bg : rgba(28, 28, 30, 255);
+    --box-txt : white;
+    --page-bg : black;
+    --s-border : rgba(79, 78, 78, 0.261);
+    --b-border : gray;
+    --ph-bg : rgb(113, 113, 113)
+}
 .auth-page {
     width: 100%;
     height: 100vh;
@@ -12,19 +32,13 @@
     height: fit-content;
     padding: 1rem 1rem;
     position: relative;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--b-border);
     border-bottom-right-radius: 7px;
     font-family: sans-serif;
-    background-color: rgba(28, 28, 30, 255);
+    background-color: var(--box-bg);
+    color: var(--box-txt);
     border-radius: 15px;
-
-}
-
-.log-in-box .heading {
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.4rem;
-    color: white;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 .log-in-box .heading h3 {
@@ -44,7 +58,6 @@
     align-self: flex-end;
     padding: 0 1.5rem;
     letter-spacing: .1rem;
-    color: white;
     font-size: .8rem;
 }
 
@@ -56,8 +69,8 @@
     padding: 0 10px;
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid white;
-    color: white;
+    border-bottom: 2px solid var(--box-txt);
+    color: var(--box-txt);
     outline: none;
     border-radius: 0;
 }
@@ -75,7 +88,7 @@
 .log-in-box .auth-btn button {
     float: right;
     background-color: rgba(68, 68, 68, 255);
-    color: white;
+    color: var(--box-txt);
     border: none;
     cursor: pointer;
     border-radius: 10px;
@@ -84,7 +97,7 @@
 
 .log-in-box .auth-btn p {
     float: left;
-    color: white;
+    color: var(--box-txt);
     margin-left: 5%;
     font-size: .85rem;
 }

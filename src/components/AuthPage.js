@@ -6,10 +6,10 @@ import NoteContext from '../context/noteContext'
 
 export default function AuthPage() {
   const context = useContext(NoteContext)
-  const {signPageStatus ,showSignIn , setShowSignIn} = context
+  const {signPageStatus ,showSignIn , setShowSignIn , theme} = context
   return (
     <>
-      <div className="auth-page">
+      <div className={`auth-page ${theme}`}>
         <div className={`res ${signPageStatus.status}`}>
           <div className="msg">
             {signPageStatus.msg}

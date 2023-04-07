@@ -112,65 +112,87 @@ const NoteState = (props) => {
 
   //function to fetc all the notes from the database
   const getNotes = async () => {
-    // API CALL
-    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": sessionStorage.getItem('authToken')
-      }
-    });
-    const json = await response.json()
+    try {
+      // API CALL
+      const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "authToken": sessionStorage.getItem('authToken')
+        }
+      });
+      const json = await response.json()
 
-    // converting the response in the opposite order , so the latest note can be on top
-    let dataOpposite = []
-    let j = json.length - 1;
-    for (let i = 0; i < json.length; i++) {
-      dataOpposite[j] = json[i];
-      j--;
-    }
-    // SETTING ALL THE NOTES IN THE NOTE LIST
-    setNotes(dataOpposite)
-    // setting the initial note
-    if (dataOpposite[0]) {
-      await setDisplayingNote(dataOpposite[0])
-      setLoading(false)
-    } else {
-      setDisplayingNote({
-        'title': `Welcome`,
-        'description': "Add your note please.",
-        'tag': 'Learning',
-        'date': "idk when",
-        "_id": "abcdef123456"
+      // converting the response in the opposite order , so the latest note can be on top
+      let dataOpposite = []
+      let j = json.length - 1;
+      for (let i = 0; i < json.length; i++) {
+        dataOpposite[j] = json[i];
+        j--;
+      }
+      // SETTING ALL THE NOTES IN THE NOTE LIST
+      setNotes(dataOpposite)
+      // setting the initial note
+      if (dataOpposite[0]) {
+        await setDisplayingNote(dataOpposite[0])
+        setLoading(false)
+      } else {
+        setDisplayingNote({
+          'title': `Welcome`,
+          'description': "Add your note please.",
+          'tag': 'Learning',
+          'date': "idk when",
+          "_id": "abcdef123456"
+        })
+      }
+    } catch {
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": "failed",
+        "msg": "Error! Check your internet and try again"
       })
+      setTimeout(() => {
+        setDisplayPageStatus('')
+      }, 3000);
     }
   }
 
   //function to add a note
   const addNote = async (title, description, tag) => {
-    // data in the form of an OBJECT to send with the API CALL
-    const data = {
-      "title": title,
-      "description": description,
-      "tag": tag
+    try {
+      // data in the form of an OBJECT to send with the API CALL
+      const data = {
+        "title": title,
+        "description": description,
+        "tag": tag
+      }
+      // API CALL
+      const response = await fetch(`${host}/api/notes/addnote`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "authToken": authToken,
+        },
+        body: JSON.stringify(data)
+      });
+      const json = await response.json()
+      //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
+      await getNotes()
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": json.status,
+        "msg": json.msg
+      })
+      setTimeout(() => {
+        setDisplayPageStatus('')
+      }, 3000);
+    } catch {
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": "failed",
+        "msg": "Error! Check your internet and try again"
+      })
     }
-    // API CALL
-    const response = await fetch(`${host}/api/notes/addnote`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": authToken,
-      },
-      body: JSON.stringify(data)
-    });
-    const json = await response.json()
-    //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
-    await getNotes()
-    setLoading2(false)
-    setDisplayPageStatus({
-      "status": json.status,
-      "msg": json.msg
-    })
     setTimeout(() => {
       setDisplayPageStatus('')
     }, 3000);
@@ -178,93 +200,115 @@ const NoteState = (props) => {
 
   //function to delete the selected note
   const deleteNote = async (id) => {
-    //API CALL
-    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": authToken
-      }
-    })
-    let json = await response.json()
-    //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
-    
-    await getNotes()
-    setLoading2(false)
-    setDisplayPageStatus({
-      "status": json.status,
-      'msg': json.msg
-    })
-    setTimeout(() => {
-      setDisplayPageStatus({
-        "status": "",
-        'msg': ""
+    try {
+      //API CALL
+      const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "authToken": authToken
+        }
       })
-    }, 3000);
+      let json = await response.json()
+      //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
+
+      await getNotes()
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": json.status,
+        'msg': json.msg
+      })
+      setTimeout(() => {
+        setDisplayPageStatus({
+          "status": "",
+          'msg': ""
+        })
+      }, 3000);
+    } catch {
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": "failed",
+        "msg": "Error! Check your internet and try again"
+      })
+      setTimeout(() => {
+        setDisplayPageStatus('')
+      }, 3000);
+    }
   }
 
   //function to update the selected note
   const updateNote = async (id, title, description, tag) => {
-    // data in the form of an OBJECT to send with the API CALL
-    const data = {
-      "title": title,
-      "description": description,
-      "tag": tag
-    }
-    //API CALL
-    // eslint-disable-next-line
-    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'PUT',
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": authToken
-      },
-      body: JSON.stringify(data)
-    });
-    let json = await response.json()
-    //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
-    setDisplayPageStatus({
-      "status": json.status,
-      'msg': json.msg
-    })
-    setTimeout(() => {
+    try {
+      // data in the form of an OBJECT to send with the API CALL
+      const data = {
+        "title": title,
+        "description": description,
+        "tag": tag
+      }
+      //API CALL
+      // eslint-disable-next-line
+      const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json",
+          "authToken": authToken
+        },
+        body: JSON.stringify(data)
+      });
+      let json = await response.json()
+      //setting NOTE DISPLAY PAGE'S STATUSES ON API CALL 
       setDisplayPageStatus({
-        "status": "",
-        'msg': ""
+        "status": json.status,
+        'msg': json.msg
       })
-    }, 3000);
-
-    // not using getNote() because it will make the latest note as displaying note
-    //updating the note list and keeping the display note as it was
-    let idToCheck = displayingNote._id
-    const response2 = await fetch(`${host}/api/notes/fetchallnotes`, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": authToken
-      }
-    });
-    const json2 = await response2.json()
-
-    // converting the response in the opposite order , so the latest note can be on top
-    let dataOpposite = []
-    let j = json2.length - 1;
-    for (let i = 0; i < json2.length; i++) {
-      dataOpposite[j] = json2[i];
-      j--;
-    }
-    setNotes(dataOpposite)
-    //setting display note as it was
-    for (let i = 0; i < notes.length; i++) {
-      if (dataOpposite[i]._id === idToCheck) {
-        setDisplayingNote({
-          "title": dataOpposite[i].title,
-          'description': dataOpposite[i].description,
-          'tag': dataOpposite[i].tag,
-          'date': dataOpposite[i].date,
-          "_id": dataOpposite[i]._id
+      setTimeout(() => {
+        setDisplayPageStatus({
+          "status": "",
+          'msg': ""
         })
+      }, 3000);
+
+      // not using getNote() because it will make the latest note as displaying note
+      //updating the note list and keeping the display note as it was
+      let idToCheck = displayingNote._id
+      const response2 = await fetch(`${host}/api/notes/fetchallnotes`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "authToken": authToken
+        }
+      });
+      const json2 = await response2.json()
+
+      // converting the response in the opposite order , so the latest note can be on top
+      let dataOpposite = []
+      let j = json2.length - 1;
+      for (let i = 0; i < json2.length; i++) {
+        dataOpposite[j] = json2[i];
+        j--;
       }
+      setNotes(dataOpposite)
+      //setting display note as it was
+      for (let i = 0; i < notes.length; i++) {
+        if (dataOpposite[i]._id === idToCheck) {
+          setDisplayingNote({
+            "title": dataOpposite[i].title,
+            'description': dataOpposite[i].description,
+            'tag': dataOpposite[i].tag,
+            'date': dataOpposite[i].date,
+            "_id": dataOpposite[i]._id
+          })
+        }
+      }
+    } catch {
+      setLoading2(false)
+      setDisplayPageStatus({
+        "status": "failed",
+        "msg": "Error! Check your internet and try again"
+      })
+      setTimeout(() => {
+        setDisplayPageStatus('')
+      }, 3000);
     }
   }
 
@@ -282,12 +326,13 @@ const NoteState = (props) => {
   // STATE TO SHOW AND SET LOGGED IN USER DETAILS
   const [userDetails, setUserDetails] = useState('')
   //STATE TO SHOW AND SET LOADER
-  const [loading , setLoading] = useState(false)
-  const [loading2 , setLoading2] = useState(false)
-  const [activeClass , setActiveClass] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [loading2, setLoading2] = useState(false)
+  const [activeClass, setActiveClass] = useState('')
+  const [theme, setTheme] = useState('dark')
 
   return (
-    <NoteContext.Provider value={{ notes: notes, displayingNote: displayingNote, setDisplayingNote: setDisplayingNote, toDisplay, setToDisplay, authToken, setAuthToken, signUp, logIn, addNote, getNotes, deleteNote, signPageStatus, displayPageStatus, setDisplayPageStatus ,showSignIn, setShowSignIn, updateNote, userDetails ,setUserDetails, loading , setLoading ,loading2 , setLoading2 , activeClass , setActiveClass}}>
+    <NoteContext.Provider value={{ notes: notes, displayingNote: displayingNote, setDisplayingNote: setDisplayingNote, toDisplay, setToDisplay, authToken, setAuthToken, signUp, logIn, addNote, getNotes, deleteNote, signPageStatus, displayPageStatus, setDisplayPageStatus, showSignIn, setShowSignIn, updateNote, userDetails, setUserDetails, loading, setLoading, loading2, setLoading2, activeClass, setActiveClass, theme, setTheme }}>
       {props.children}
     </NoteContext.Provider>
   )
